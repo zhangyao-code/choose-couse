@@ -1,0 +1,15 @@
+{extend name="admin/layout" /}
+{block name="main"}
+
+<form action=""  method="post" style="margin-left: 30%; margin-right: 40%; margin-top: 70px">
+    <div class="form-group">
+        <label for="name">课程标题</label>
+        <input type="name" name="name" required="true" id="name" class="form-control"  placeholder="课程标题">
+    </div>
+    <div class="form-group">
+        <label for="description">简介</label>
+        <textarea rows="3" cols="20" type="description" name="description" id="description" required="true" class="form-control" placeholder="简介"></textarea>
+    </div>
+    <button type="submit" class="btn btn-default">保存</button>
+</form>
+{/block}
