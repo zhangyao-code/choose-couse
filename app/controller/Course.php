@@ -17,13 +17,19 @@ class Course extends BaseController
      */
     public function index()
     {
-        $data = $this->request->request();
+        $data = $this->request->param();
+
         $name = empty($data['name']) ? '': $data['name'];
 
-        $list = Db::name('course')->order('id', 'desc')->paginate(1000);
-        if(!empty($name)){
-            $list = Db::name('course')->where('name', $name)->order('id', 'desc')->paginate(1000);
-        }
+        $list = Db::name('course')
+            ->where('name','like' ,'%'.$name.'%')
+            ->order('id', 'desc')
+            ->paginate([
+                'list_rows'=>10,
+                'var_page' => 'page',
+                'query' => $data
+            ]);
+
         $page = $list->render();
         return  View::fetch('admin/course/list', ['list' => $list, 'page' => $page, 'name'=>$name]);
 

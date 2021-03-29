@@ -5,17 +5,13 @@ use app\BaseController;
 use app\Biz\User\UserService;
 use think\annotation\Route;
 
+use think\facade\Db;
 use think\facade\Session;
 use think\facade\View;
 use think\Request;
 
 class Login extends BaseController
 {
-    /**
-     * @param Request $request
-     * @return string
-     * @Route("login")
-     */
     public function login(Request $request)
     {
         if(!$request->isGet()){
@@ -36,8 +32,14 @@ class Login extends BaseController
             $UserService->updateUser($user['id'], ['loginDate'=>time()]);
             return  redirect('/');
         }
-
       return  View::fetch('login/index');
+    }
+
+    public function check()
+    {
+        $data = $this->request->param();
+        $user = Db::table('user')->where('nickname',$data['nickname'])->find();
+        return \json(!empty($user)&&$user['password']==$data['password']);
     }
 
     /**

@@ -1,24 +1,20 @@
 {extend name="admin/layout" /}
 {block name="main"}
-<form action=""  method="post" id="user-create" style="margin-left: 30%; margin-right: 40%; margin-top: 70px">
+<form action=""  method="post" id="user-update" style="margin-left: 30%; margin-right: 40%; margin-top: 70px">
     <div class="form-group">
         <label for="nickname">用户名</label>
-        <input type="nickname" name="nickname" data-url="/user/create_check" required="true" value="{$user.nickname}" id="nickname" class="form-control"  placeholder="用户名">
+        <input type="nickname" name="nickname" data-url="/user/update_check/{$user.id}" required="true" value="{$user.nickname}" id="nickname" class="form-control"  placeholder="用户名">
     </div>
     <div class="form-group">
         <label for="email">邮箱</label>
-        <input type="email" name="email" id="email" data-url="/user/create_check" required="true" value="{$user.email}" class="form-control" placeholder="email">
+        <input type="email" name="email" id="email" data-url="/user/update_check/{$user.id}" required="true" value="{$user.email}" class="form-control" placeholder="email">
     </div>
     <div class="form-group">
         <label for="mobile">电话</label>
-        <input type="mobile" name="mobile" id="mobile" data-url="/user/create_check" required="true" value="{$user.mobile}" class="form-control" placeholder="电话">
+        <input type="mobile" name="mobile" id="mobile" data-url="/user/update_check/{$user.id}" required="true" value="{$user.mobile}" class="form-control" placeholder="电话">
     </div>
-    <div class="form-group">
-        <in name="tes" value="{$user.roles}"> <input type="checkbox" name="roles[]" checked value="student"> 学生</in>
-        <input type="checkbox" name="roles[]" value="teacher"> 讲师
-        <input type="checkbox" name="roles[]" value="admin"> 管理员
-    </div>
+
     <button type="submit" class="btn btn-default">保存</button>
 </form>
-<script src="/static/js/admin/user/create.js"></script>
+<script src="/static/js/admin/user/update.js"></script>
 {/block}

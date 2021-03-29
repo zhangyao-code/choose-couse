@@ -607,8 +607,7 @@ abstract class BaseQuery
             $config   = $defaultConfig;
             $listRows = intval($listRows ?: $config['list_rows']);
         }
-
-        $page = isset($config['page']) ? (int) $config['page'] : Paginator::getCurrentPage($config['var_page']);
+        $page = isset($config['page'])? (int)$config['page'] : (empty($config['query']['page']) ? Paginator::getCurrentPage($config['var_page']):(int)$config['query']['page']);
 
         $page = $page < 1 ? 1 : $page;
 

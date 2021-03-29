@@ -3,6 +3,7 @@ declare (strict_types = 1);
 
 namespace app;
 
+use app\Biz\CurrentUser;
 use think\App;
 use think\exception\HttpResponseException;
 use think\exception\ValidateException;
@@ -47,17 +48,16 @@ abstract class BaseController
     {
         $this->app     = $app;
         $this->request = $this->app->request;
-        $noLogins = ['/login'];
         $user = Session::get('user');
-        if(empty($user)){
-            session(null);
-            return $this->redirectTo('login');
+
+        if(!in_array($this->request->baseUrl(), ['/login', '/login_check']) && empty($user)){
+            return $this->redirectTo('/login');
         }
 
         if($this->request->baseUrl() == '/login' && !empty($user)){
             return $this->redirectTo('/');
         }
-
+        bind('user', new CurrentUser($user));
         // 控制器初始化
         $this->initialize();
     }

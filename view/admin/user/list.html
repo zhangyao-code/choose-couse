@@ -35,8 +35,11 @@
             <td>{$user.email}</td>
             <td>{$user.mobile}</td>
             <td>{$user.roles}</td>
-            <td><a href="/user/update/{$user.id}" class="btn btn-default btn-sm">编辑</a>
-                <a href="/user/delete/{$user.id}" class="btn btn-default btn-sm">删除</a>
+            <td>
+                {if condition="$currentUser.id neq $user.id"}
+                    <a href="/user/update/{$user.id}" class="btn btn-default btn-sm">编辑</a>
+                    <a href="/user/delete/{$user.id}" class="btn btn-default btn-sm">删除</a>
+                {/if}
             </td>
         </tr>
     {/volist}
