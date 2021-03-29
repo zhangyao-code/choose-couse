@@ -1,4 +1,6 @@
 /.idea
+/cache
+/logs
 /.vscode
 *.log
 .env
