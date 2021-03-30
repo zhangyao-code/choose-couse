@@ -1,0 +1,10 @@
+.admin-body {
+    padding: 20px;
+}
+.admin-body .error {
+    color: red;
+}
+
+.pagination {
+    margin-left: 40%;
+}
