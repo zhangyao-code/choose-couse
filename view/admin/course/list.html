@@ -24,19 +24,26 @@
         <th>简介</th>
         <th>讲师</th>
         <th>学员数</th>
+        <th>操作</th>
     </tr>
     </thead>
     <tbody>
     {volist name='list' id='course'}
         <tr id="">
-            <td>{$course.id}</td>
-            <td>{$course.name}</td>
-            <td>{$course.description}</td>
-            <td></td>
-            <td>{$course.studentNum}</td>
+            <td width="5%">{$course.id}</td>
+            <td width="25%">{$course.name}</td>
+            <td width="25%">{$course.description}</td>
+            <td width="10%">{$course.teacher}</td>
+            <td width="5%">{$course.studentNum}</td>
+            <td width="20%">
+                <a href="/course/{$course.id}/member" class="btn btn-default btn-sm">学生管理</a>
+                <a href="/course/update/{$course.id}" class="btn btn-default btn-sm">编辑</a>
+                <button data-url="/course/delete/{$course.id}" class="btn btn-default btn-sm js-delete">删除</button>
+            </td>
         </tr>
     {/volist}
     </tbody>
 </table>
 {$page|raw}
+<script src="/static/js/admin/course/list.js"></script>
 {/block}

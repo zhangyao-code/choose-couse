@@ -1,0 +1,69 @@
+{extend name="admin/layout" }
+{block name="main"}
+{load file="/static/css/admin/user/list.css"}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<div style="margin-top: 70px;width: 100%;height: 70px;background: #f5f5f5;border: 1px solid #e4e7ed;padding: 20px">
+    <form action="" method="get" class="form-inline" id="login-form">
+        <div class="form-group">
+            <input type="text" name="nickname" class="form-control" placeholder="用户名" value="{$nickname}"/>
+        </div>
+        <div class="form-group">
+            <button type="submit" id="login-btn" class="btn btn-primary btn-block btn-flat">搜索</button>
+        </div>
+        <div class="form-group">
+            <a class="btn btn-primary btn-block btn-flat" data-toggle="modal" data-target="#member-modal">添加学生</a>
+        </div>
+    </form>
+</div>
+
+<table class="table" style="margin-top: 40px">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>学生</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {volist name='list' id='user'}
+    <tr id="">
+        <td width="5%">{$user.id}</td>
+        <td width="50%">{$user.nickname}</td>
+        <td width="20%">
+            <button data-url="/course_member/delete/{$user.id}" class="btn btn-default btn-sm js-delete">移除</button>
+        </td>
+    </tr>
+    {/volist}
+    </tbody>
+</table>
+{$page|raw}
+<div class="modal" tabindex="-1" id="member-modal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <dic class="modal-title" style="font-size: 18px">添加学员</dic>
+                <button style="float: right; margin: 5px 5px 5px 5px" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/course/{$course.id}/add_member"  id="add-member" method="post">
+                    <div class="form-group">
+                        <label for="userIds">添加学生</label>
+                        <select class="form-control" style="width: 500px" id="userIds" name="userIds[]" >
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary js-add-member" data-id="{$course.id}">添加</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/js/admin/course/member-list.js"></script>
+
+{/block}

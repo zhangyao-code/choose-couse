@@ -389,10 +389,10 @@ abstract class Paginator implements ArrayAccess, Countable, IteratorAggregate, J
      * @param callable $callback
      * @return $this
      */
-    public function each(callable $callback)
+    public function each(callable $callback, $data=[])
     {
         foreach ($this->items as $key => $item) {
-            $result = $callback($item, $key);
+            $result = $callback($item, $key, $data);
 
             if (false === $result) {
                 break;
